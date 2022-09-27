@@ -170,7 +170,11 @@
 
     <!--  Style and template for the DataGridRow.  -->
     <Style x:Key="DefaultDataGridRowStyle" TargetType="{x:Type DataGridRow}">
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Opacity="0.0" Color="{DynamicResource ControlFillColorDefault}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -192,7 +196,7 @@
                 <ControlTemplate TargetType="{x:Type DataGridRow}">
                     <Border
                         x:Name="DGR_Border"
-                        Background="Transparent"
+                        Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         SnapsToDevicePixels="True">
@@ -226,148 +230,68 @@
                                 <VisualState x:Name="Normal" />
 
                                 <!--  Provide a different appearance for every other row.  -->
-                                <VisualState x:Name="Normal_AlternatingRow">
-                                    <!--
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="Red" />
-                                        </ColorAnimationUsingKeyFrames>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                <VisualState x:Name="Normal_AlternatingRow" />
 
-                                            <EasingColorKeyFrame KeyTime="0" Value="Red" />
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                    -->
-                                </VisualState>
-
-                                <!--
-                                    In this example, a row in Editing or selected mode has an
-                                    identical appearances. In other words, the states
-                                    Normal_Selected, Unfocused_Selected, Normal_Editing,
-                                    MouseOver_Editing, MouseOver_Unfocused_Editing,
-                                    and Unfocused_Editing are identical.
-                                -->
                                 <VisualState x:Name="Normal_Selected">
-                                    <!--
                                     <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlMediumColor}" />
-                                        </ColorAnimationUsingKeyFrames>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[1].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlDarkColor}" />
-                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Duration="0" To="{DynamicResource SystemAccentColor}" />
+                                        <DoubleAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Opacity)" Duration="0" To="0.6" />
                                     </Storyboard>
-                                    -->
                                 </VisualState>
 
                                 <VisualState x:Name="Unfocused_Selected">
-                                    <!--
                                     <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[0].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlMediumColor}" />
-                                        </ColorAnimationUsingKeyFrames>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[1].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlDarkColor}" />
-                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Duration="0" To="{DynamicResource SystemAccentColor}" />
+                                        <DoubleAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Opacity)" Duration="0" To="0.6" />
                                     </Storyboard>
-                                    -->
                                 </VisualState>
 
                                 <VisualState x:Name="Normal_Editing">
-                                    <!--
                                     <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[0].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlMediumColor}" />
-                                        </ColorAnimationUsingKeyFrames>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[1].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlDarkColor}" />
-                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Duration="0" To="{DynamicResource SystemAccentColor}" />
+                                        <DoubleAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Opacity)" Duration="0" To="0.6" />
                                     </Storyboard>
-                                    -->
                                 </VisualState>
 
                                 <VisualState x:Name="MouseOver_Editing">
-                                    <!--
                                     <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[0].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlMediumColor}" />
-                                        </ColorAnimationUsingKeyFrames>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[1].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlDarkColor}" />
-                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Duration="0" To="{DynamicResource SystemAccentColor}" />
+                                        <DoubleAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Opacity)" Duration="0" To="0.8" />
                                     </Storyboard>
-                                    -->
                                 </VisualState>
 
                                 <VisualState x:Name="MouseOver_Unfocused_Editing">
-                                    <!--
                                     <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[0].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlMediumColor}" />
-                                        </ColorAnimationUsingKeyFrames>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[1].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlDarkColor}" />
-                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Duration="0" To="{DynamicResource SystemAccentColor}" />
+                                        <DoubleAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Opacity)" Duration="0" To="0.8" />
                                     </Storyboard>
-                                    -->
                                 </VisualState>
 
                                 <VisualState x:Name="Unfocused_Editing">
-                                    <!--
                                     <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[0].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlMediumColor}" />
-                                        </ColorAnimationUsingKeyFrames>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[1].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlDarkColor}" />
-                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Duration="0" To="{DynamicResource SystemAccentColor}" />
+                                        <DoubleAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Opacity)" Duration="0" To="0.6" />
                                     </Storyboard>
-                                    -->
                                 </VisualState>
 
                                 <VisualState x:Name="MouseOver">
-                                    <!--
                                     <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[0].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlMediumColor}" />
-                                        </ColorAnimationUsingKeyFrames>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[1].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlMouseOverColor}" />
-                                        </ColorAnimationUsingKeyFrames>
+                                        <DoubleAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Opacity)" Duration="0" To="0.8" />
                                     </Storyboard>
-                                    -->
                                 </VisualState>
 
-                                <!--
-                                    In this example, the appearance of a selected row
-                                    that has the mouse over it is the same regardless of
-                                    whether the row is selected.  In other words, the states
-                                    MouseOver_Editing and MouseOver_Unfocused_Editing are identical.
-                                -->
                                 <VisualState x:Name="MouseOver_Selected">
-                                    <!--
                                     <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[0].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlMouseOverColor}" />
-                                        </ColorAnimationUsingKeyFrames>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[1].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlMouseOverColor}" />
-                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Duration="0" To="{DynamicResource SystemAccentColor}" />
+                                        <DoubleAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Opacity)" Duration="0" To="0.8" />
                                     </Storyboard>
-                                    -->
                                 </VisualState>
 
                                 <VisualState x:Name="MouseOver_Unfocused_Selected">
-                                    <!--
                                     <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[0].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlMouseOverColor}" />
-                                        </ColorAnimationUsingKeyFrames>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DGR_Border" Storyboard.TargetProperty="(Panel.Background).                       (GradientBrush.GradientStops)[1].(GradientStop.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource ControlMouseOverColor}" />
-                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Duration="0" To="{DynamicResource SystemAccentColor}" />
+                                        <DoubleAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Opacity)" Duration="0" To="0.8" />
                                     </Storyboard>
-                                    -->
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
